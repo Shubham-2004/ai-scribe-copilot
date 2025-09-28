@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stream_script/features/bottomNav/presentation/bottomNavbar.dart';
+import 'package:stream_script/features/bottomNav/services/bottomNav_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -43,11 +45,11 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(const Duration(milliseconds: 3500), () {
       if (mounted) {
         // TODO: Navigate to home screen when ready
-        // Navigator.of(context).pushReplacement(
-        //   MaterialPageRoute(
-        //     builder: (context) => const HomeScreen(),
-        //   ),
-        // );
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => BottomNavbar(),
+          ),
+        );
       }
     });
   }
