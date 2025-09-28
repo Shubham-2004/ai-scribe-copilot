@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { getPatients, addPatient, getSessionsByPatient } from '../controllers/patientController.js';
 const router = express.Router();
-const patientController = require('../controllers/patientController');
 
-router.get('/patients', patientController.getPatients);
-router.post('/add-patient-ext', patientController.addPatient);
-router.get('/fetch-session-by-patient/:patientId', patientController.getSessionsByPatient);
+router.get('/patients', getPatients);
+router.post('/add-patient-ext', addPatient);
+router.get('/fetch-session-by-patient/:patientId', getSessionsByPatient);
 
-module.exports = router;
+export default router;

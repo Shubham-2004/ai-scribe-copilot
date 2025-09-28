@@ -1,14 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-require('dotenv').config();
+import express from 'express';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
+import patientRoutes from './routes/patientRoutes.js';
+import audioRoutes from './routes/audioRoutes.js';
 
-const authRoutes = require('./routes/authRoutes');
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 
 app.use('/auth', authRoutes);
-app.use('/', require('./routes/patientRoutes'));
+app.use('/', patientRoutes);
+app.use('/', audioRoutes);
 
 app.get('/', (req, res) => {
   res.send('Supabase Auth API is running');
