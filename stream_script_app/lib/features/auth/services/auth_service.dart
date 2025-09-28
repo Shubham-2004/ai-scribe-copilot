@@ -49,6 +49,6 @@ class AuthService {
     userData = null;
   }
 
-  // Check if user is logged in
+
   bool get isLoggedIn => accessToken != null;
 }

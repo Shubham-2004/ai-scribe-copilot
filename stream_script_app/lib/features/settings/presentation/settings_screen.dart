@@ -35,9 +35,7 @@ class SettingsScreen extends StatelessWidget {
 
   Widget _buildUserProfileSection() {
     final user = AuthService.userData;
-    final name = user?['name'] ?? 'User Name';
-    final email = user?['email'] ?? 'No Email';
-    final loginTime = user?['loginTimestamp'];
+   
 
     return Column(
       children: [
@@ -47,31 +45,7 @@ class SettingsScreen extends StatelessWidget {
           backgroundColor: const Color(0xFF4A7C7E),
         ),
         const SizedBox(height: 12),
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF335D5F),
-          ),
-        ),
-        Text(
-          email,
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey[600],
-          ),
-        ),
-        if (loginTime != null) ...[
-          const SizedBox(height: 8),
-          Text(
-            "Logged in: ${DateTime.tryParse(loginTime)?.toLocal().toString().split('.').first ?? loginTime}",
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.grey[500],
-            ),
-          ),
-        ],
+    
       ],
     );
   }
