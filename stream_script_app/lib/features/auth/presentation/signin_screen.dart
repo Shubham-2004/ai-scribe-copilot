@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import '../services/auth_service.dart';
 import 'signup_screen.dart';
 import '../../bottomNav/presentation/bottomNavbar.dart';
+import 'package:shared_preferences/shared_preferences.dart'; 
 
 class SignInScreen extends StatefulWidget {
   final String? initialEmail;
@@ -73,7 +74,6 @@ class _SignInScreenState extends State<SignInScreen> with SingleTickerProviderSt
       _error = null;
     });
 
-    // Mock delay to show loading indicator
     await Future.delayed(const Duration(seconds: 1));
 
     final auth = AuthService();
@@ -88,6 +88,12 @@ class _SignInScreenState extends State<SignInScreen> with SingleTickerProviderSt
           _error = res['error'].toString();
         });
       } else {
+        // Save userId to SharedPreferences
+        final userId = AuthService.userData?['id'];
+        if (userId != null) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('userId', userId.toString());
+        }
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => const BottomNavbar(),

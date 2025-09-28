@@ -1,54 +1,55 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
-  static const String baseUrl = 'https://streamscript.onrender.com/auth';
+  static final SupabaseClient _supabase = Supabase.instance.client;
 
   // Session storage
   static String? accessToken;
   static Map<String, dynamic>? userData;
 
   Future<Map<String, dynamic>> signup(String email, String password) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/signup'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'email': email, 'password': password}),
+    final response = await _supabase.auth.signUp(
+      email: email,
+      password: password,
     );
-    final result = jsonDecode(response.body);
-
-    // Save session if signup returns token/user
-    if (result['access_token'] != null) {
-      accessToken = result['access_token'];
-      userData = result['user'];
+    if (response.user != null) {
+      accessToken = response.session?.accessToken;
+      userData = response.user!.toJson();
+      return {
+        'access_token': accessToken,
+        'user': userData,
+      };
     }
-
-    return result;
+    return {
+      'error': response.session == null ? 'Signup failed' : null,
+    };
   }
+
   Future<Map<String, dynamic>> signin(String email, String password) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/signin'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'email': email, 'password': password}),
+    final response = await _supabase.auth.signInWithPassword(
+      email: email,
+      password: password,
     );
-    final result = jsonDecode(response.body);
-
-    // Save session if signin returns token/user
-    if (result['access_token'] != null) {
-      accessToken = result['access_token'];
-      userData = result['user'];
-      // Store login timestamp
+    if (response.user != null) {
+      accessToken = response.session?.accessToken;
+      userData = response.user!.toJson();
       userData?['loginTimestamp'] = DateTime.now().toIso8601String();
+      return {
+        'access_token': accessToken,
+        'user': userData,
+      };
     }
-
-    return result;
+    return {
+      'error': 'Signin failed',
+    };
   }
 
   // Clear session
   void signout() {
     accessToken = null;
     userData = null;
+    _supabase.auth.signOut();
   }
-
 
   bool get isLoggedIn => accessToken != null;
 }

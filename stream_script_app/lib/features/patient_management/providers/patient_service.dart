@@ -15,6 +15,18 @@ class PatientService {
     return [];
   }
 
+  // Fetch all patients (no userId filter)
+  Future<List<Map<String, dynamic>>> fetchAllPatients() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/patients'),
+    );
+    final result = jsonDecode(response.body);
+    if (response.statusCode == 200 && result['patients'] != null) {
+      return List<Map<String, dynamic>>.from(result['patients']);
+    }
+    return [];
+  }
+
   Future<Map<String, dynamic>?> addPatient({
     required String userId,
     required String name,

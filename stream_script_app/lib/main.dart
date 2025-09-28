@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:supabase_flutter/supabase_flutter.dart'; // <-- Add this import
 import 'features/onboarding/presentation/splash_screen.dart';
 import 'features/auth/services/auth_service.dart';
 import 'features/bottomNav/presentation/bottomNavbar.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://yojlumklmggiqycatsch.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlvamx1bWtsbWdnaXF5Y2F0c2NoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwNDU5MDksImV4cCI6MjA3NDYyMTkwOX0.H9lBr_nue_lN-CWC0Fk0-eHe8avNG8b-ZHDq2NREv2w',
+  );
   runApp(
     DevicePreview(
       enabled: false,

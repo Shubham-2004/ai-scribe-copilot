@@ -12,7 +12,7 @@ exports.getPatients = async (req, res) => {
 
   if (error) return res.status(500).json({ error: error.message });
   res.json({ patients: data });
-};
+};s
 
 // POST /url/add-patient-ext
 exports.addPatient = async (req, res) => {
