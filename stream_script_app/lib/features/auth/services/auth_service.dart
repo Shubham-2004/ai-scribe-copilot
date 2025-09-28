@@ -1,4 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   static final SupabaseClient _supabase = Supabase.instance.client;
@@ -15,6 +16,9 @@ class AuthService {
     if (response.user != null) {
       accessToken = response.session?.accessToken;
       userData = response.user!.toJson();
+      // Cache userId
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userId', userData?['id'] ?? '');
       return {
         'access_token': accessToken,
         'user': userData,
@@ -34,6 +38,9 @@ class AuthService {
       accessToken = response.session?.accessToken;
       userData = response.user!.toJson();
       userData?['loginTimestamp'] = DateTime.now().toIso8601String();
+      // Cache userId
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userId', userData?['id'] ?? '');
       return {
         'access_token': accessToken,
         'user': userData,
@@ -45,9 +52,11 @@ class AuthService {
   }
 
   // Clear session
-  void signout() {
+  void signout() async {
     accessToken = null;
     userData = null;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('userId');
     _supabase.auth.signOut();
   }
 

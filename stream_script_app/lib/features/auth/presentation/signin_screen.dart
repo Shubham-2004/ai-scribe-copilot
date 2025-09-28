@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import '../services/auth_service.dart';
 import 'signup_screen.dart';
 import '../../bottomNav/presentation/bottomNavbar.dart';
-import 'package:shared_preferences/shared_preferences.dart'; 
+import 'package:shared_preferences/shared_preferences.dart'; // <-- Add this import
 
 class SignInScreen extends StatefulWidget {
   final String? initialEmail;
