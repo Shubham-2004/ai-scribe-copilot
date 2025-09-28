@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stream_script/core/components/custom_appbar.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -6,8 +7,8 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
+      appBar: CustomAppBar(
+        title: 'Settings',
       ),
       body: const Center(
         child: Text('Settings Screen'),

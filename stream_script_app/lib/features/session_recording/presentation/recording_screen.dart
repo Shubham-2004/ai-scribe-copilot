@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stream_script/core/components/custom_appbar.dart';
 
 class RecordingScreen extends StatelessWidget {
   const RecordingScreen({super.key});
@@ -6,8 +7,8 @@ class RecordingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Recording'),
+      appBar: CustomAppBar(
+        title: 'Recording',
       ),
       body: const Center(
         child: Text('Recording Screen'),
