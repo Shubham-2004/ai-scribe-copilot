@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: Center(
         child: AnimatedBuilder(
           animation: _animationController,
@@ -77,11 +77,11 @@ class _SplashScreenState extends State<SplashScreen>
                   children: [
                     // Image logo with circular background
                     Container(
-                      width: 200,
-                      height: 200,
+                      width: 120,
+                      height: 120,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: const Color(0xFF4A7C7E),
+                        color: Colors.transparent,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.1),
@@ -92,7 +92,7 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                       child: Center(
                         child: Image.asset(
-                          'assets/brain_mic.png',
+                          'assets/images/brain_mic.png',
                           width: 120,
                           height: 120,
                         ),
