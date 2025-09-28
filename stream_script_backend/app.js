@@ -8,6 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use('/auth', authRoutes);
+app.use('/url', patientRoutes);
 
 app.get('/', (req, res) => {
   res.send('Supabase Auth API is running');
