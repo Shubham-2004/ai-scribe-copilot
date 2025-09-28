@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './bottomNav_pages.dart';
+import 'package:stream_script/features/patient_management/presentation/patients_screen.dart';
+import 'package:stream_script/features/session_recording/presentation/recording_screen.dart';
+import 'package:stream_script/features/settings/presentation/settings_screen.dart';
 
 class BottomNavbar extends StatefulWidget {
 	const BottomNavbar({super.key});
@@ -13,7 +15,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
 		final List<Widget> _pages = [
 			PatientsScreen(),
-			RecordScreen(),
+			RecordingScreen(),
 			SettingsScreen(),
 		];
 
