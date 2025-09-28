@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stream_script/features/auth/presentation/signin_screen.dart';
 import 'package:stream_script/features/bottomNav/presentation/bottomNavbar.dart';
-import 'package:stream_script/features/bottomNav/services/bottomNav_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen>
         // TODO: Navigate to home screen when ready
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => BottomNavbar(),
+            builder: (context) => SignInScreen(),
           ),
         );
       }
