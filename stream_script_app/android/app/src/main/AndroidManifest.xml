@@ -1,4 +1,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Permissions for core functionality -->
+    <!-- Allows the app to connect to the internet to upload audio chunks. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Required to record audio from the microphone. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- Allows the app to check for network connectivity status (online/offline). -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
+    <!-- Permissions for robust interruption handling -->
+    <!-- Allows the app to detect incoming phone calls to pause/resume recording. -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- Prevents the device from sleeping during a long recording session. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- Required to run a service in the foreground, essential for keeping the recording alive when the app is minimized or the screen is off. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- For Android 14 (API 34) and above, you must specify the type of foreground service. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+
+
     <application
         android:label="Stream Script"
         android:name="${applicationName}"
